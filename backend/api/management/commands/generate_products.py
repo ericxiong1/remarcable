@@ -73,6 +73,8 @@ class Command(BaseCommand):
             "This {quality} {item} is ideal for daily routines and simple organization.",
         ]
 
+        # get_or_create here to ensure if the database is empty we can just create categories/tags
+        # on demand.
         categories = []
         for name in category_names:
             category, _ = Category.objects.get_or_create(name=name)
@@ -84,6 +86,9 @@ class Command(BaseCommand):
             tags.append(tag)
 
         created_count = 0
+
+        # Product names must be unique, so the amount of products generated may be less than expected
+        # due to a name being generated that's already in the db.
 
         for i in range(20):
             word = random.choice(product_words)

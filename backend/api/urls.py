@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import health_check
+from .views import product_list_api
 
 urlpatterns = [
-    path("health/", health_check),
+    path("products/", product_list_api, name="product_list_api"),
 ]
